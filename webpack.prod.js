@@ -50,8 +50,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebPackPlugin({
-      // template: './src/index.html',
-      title: 'Mi webpack App',
+      template: './src/index.html',
       filename: './index.html',
     }),
     new MiniCssExtract({
