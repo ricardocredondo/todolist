@@ -1,5 +1,8 @@
 import './styles.css';
-import { Todo } from './classes/todo.class';
+import { Todo, TodoList } from './classes/index-classes';
 //
-const tarea = new Todo('Aprender react');
-console.log(tarea);
+const todolist = new TodoList();
+const tarea1 = new Todo('Aprender react');
+const tarea2 = new Todo('Aprender Javascript');
+todolist.nuevoTodo(tarea1);
+console.log(todolist);
