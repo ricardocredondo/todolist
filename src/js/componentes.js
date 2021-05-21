@@ -1,5 +1,9 @@
+import { Todo } from '../classes/todo.class';
+import { todolist } from '../index';
+
 // REFERENCIAS HTML
 const list = document.querySelector('.todo-list');
+const entradaTarea = document.querySelector('.new-todo');
 // FUNCION CONSTRUIR LISTA TAREAS HTML
 export const crearTodoHtml = (todo) => {
   const fragment = document.createDocumentFragment();
@@ -34,3 +38,14 @@ export const crearTodoHtml = (todo) => {
   fragment.append(listItem);
   list.append(fragment);
 };
+// EVENTOS
+entradaTarea.addEventListener('keyup', (e) => {
+  let texto = e.target.value;
+  if (e.keyCode === 13 && texto.length > 0) {
+    const nuevaTarea = new Todo(texto);
+    todolist.nuevoTodo(nuevaTarea);
+    console.log(todolist);
+    crearTodoHtml(nuevaTarea);
+    entradaTarea.value = '';
+  }
+});

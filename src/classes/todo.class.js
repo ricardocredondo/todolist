@@ -4,7 +4,7 @@ export class Todo {
     this.tarea = tarea;
 
     this.id = new Date().getTime();
-    this.completado = true;
+    this.completado = false;
     this.creado = new Date();
   }
 }
