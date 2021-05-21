@@ -51,10 +51,12 @@ entradaTarea.addEventListener('keyup', (e) => {
 list.addEventListener('click', (e) => {
   const nombreElemento = e.target.localName;
   const elementoPadre = e.target.parentElement.parentElement;
-  const todoId = elementoPadre.getAttribute('data-id');
+  const todoId = parseInt(elementoPadre.getAttribute('data-id'));
   if (nombreElemento.includes('input')) {
-    todolist.completadoTodo(parseInt(todoId));
+    todolist.completadoTodo(todoId);
     elementoPadre.classList.toggle('completed');
+  } else if (nombreElemento.includes('button')) {
+    todolist.eliminarTodo(todoId);
+    list.removeChild(elementoPadre);
   }
-  console.log(todolist);
 });
