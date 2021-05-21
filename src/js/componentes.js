@@ -2,14 +2,14 @@ import { Todo } from '../classes/todo.class';
 import { todolist } from '../index';
 
 // REFERENCIAS HTML
-const list = document.querySelector('.todo-list');
 const entradaTarea = document.querySelector('.new-todo');
+const list = document.querySelector('.todo-list');
 // FUNCION CONSTRUIR LISTA TAREAS HTML
 export const crearTodoHtml = (todo) => {
   const fragment = document.createDocumentFragment();
   // LI-------
   const listItem = document.createElement('LI');
-  listItem.classList.toggle('completed', todo.completado);
+  // listItem.classList.toggle('completed', todo.completado);
   listItem.setAttribute('data-id', todo.id);
   // **DIV------
   const listDiv = document.createElement('DIV');
@@ -18,7 +18,7 @@ export const crearTodoHtml = (todo) => {
   const listInput = document.createElement('INPUT');
   listInput.classList.add('toggle');
   listInput.setAttribute('type', 'checkbox');
-  todo.completado ? (listInput.checked = false) : (listInput.checked = true);
+  todo.completado ? (listInput.checked = true) : (listInput.checked = false);
   // ****LABEL--------
   const listLabel = document.createElement('LABEL');
   listLabel.textContent = `${todo.tarea}`;
@@ -44,8 +44,17 @@ entradaTarea.addEventListener('keyup', (e) => {
   if (e.keyCode === 13 && texto.length > 0) {
     const nuevaTarea = new Todo(texto);
     todolist.nuevoTodo(nuevaTarea);
-    console.log(todolist);
     crearTodoHtml(nuevaTarea);
     entradaTarea.value = '';
   }
+});
+list.addEventListener('click', (e) => {
+  const nombreElemento = e.target.localName;
+  const elementoPadre = e.target.parentElement.parentElement;
+  const todoId = elementoPadre.getAttribute('data-id');
+  if (nombreElemento.includes('input')) {
+    todolist.completadoTodo(parseInt(todoId));
+    elementoPadre.classList.toggle('completed');
+  }
+  console.log(todolist);
 });

@@ -7,6 +7,13 @@ export class TodoList {
     this.todos.push(todo);
   }
   eliminarTodo(id) {}
-  completadoTodo(id) {}
+  completadoTodo(id) {
+    for (let elem of this.todos) {
+      if (elem.id === id) {
+        elem.completado = !elem.completado;
+        break;
+      }
+    }
+  }
   eliminarCompletadoTodo() {}
 }
