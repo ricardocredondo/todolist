@@ -5,8 +5,8 @@ export const crearTodoHtml = (todo) => {
   const fragment = document.createDocumentFragment();
   // LI-------
   const listItem = document.createElement('LI');
-  listItem.classList.add('completed');
-  listItem.setAttribute('data-id', 'abc');
+  listItem.classList.toggle('completed', todo.completado);
+  listItem.setAttribute('data-id', todo.id);
   // **DIV------
   const listDiv = document.createElement('DIV');
   listDiv.classList.add('view');
@@ -14,7 +14,7 @@ export const crearTodoHtml = (todo) => {
   const listInput = document.createElement('INPUT');
   listInput.classList.add('toggle');
   listInput.setAttribute('type', 'checkbox');
-  listInput.setAttribute('checked', true);
+  todo.completado ? (listInput.checked = false) : (listInput.checked = true);
   // ****LABEL--------
   const listLabel = document.createElement('LABEL');
   listLabel.textContent = `${todo.tarea}`;
