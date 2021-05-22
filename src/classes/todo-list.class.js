@@ -17,5 +17,7 @@ export class TodoList {
       }
     }
   }
-  eliminarCompletadoTodo() {}
+  eliminarCompletadosTodo() {
+    this.todos = this.todos.filter((elem) => !elem.completados);
+  }
 }

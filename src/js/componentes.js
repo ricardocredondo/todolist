@@ -4,6 +4,7 @@ import { todolist } from '../index';
 // REFERENCIAS HTML
 const entradaTarea = document.querySelector('.new-todo');
 const list = document.querySelector('.todo-list');
+const btnBorrarCompletados = document.querySelector('.clear-completed');
 // FUNCION CONSTRUIR LISTA TAREAS HTML
 export const crearTodoHtml = (todo) => {
   const fragment = document.createDocumentFragment();
@@ -58,5 +59,14 @@ list.addEventListener('click', (e) => {
   } else if (nombreElemento.includes('button')) {
     todolist.eliminarTodo(todoId);
     list.removeChild(elementoPadre);
+  }
+});
+btnBorrarCompletados.addEventListener('click', () => {
+  todolist.eliminarCompletadosTodo();
+  for (let i = list.children.length - 1; i >= 0; i--) {
+    const elemento = list.children[i];
+    if (elemento.classList.contains('completed')) {
+      list.removeChild(elemento);
+    }
   }
 });
