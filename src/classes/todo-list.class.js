@@ -1,3 +1,4 @@
+import { Todo } from './todo.class';
 // Manejar toda la lista de todos
 export class TodoList {
   constructor() {
@@ -32,5 +33,6 @@ export class TodoList {
     this.todos = localStorage.getItem('todo')
       ? JSON.parse(localStorage.getItem('todo'))
       : [];
+    this.todos = this.todos.map((obj) => Todo.fromJson(obj));
   }
 }
