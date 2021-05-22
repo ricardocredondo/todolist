@@ -1,4 +1,4 @@
-import { Todo } from '../classes/todo.class';
+import { Todo } from '../classes/index-classes';
 import { todolist } from '../index';
 
 // REFERENCIAS HTML
