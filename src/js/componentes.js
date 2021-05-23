@@ -2,12 +2,14 @@ import { Todo } from '../classes/index-classes';
 import { todolist } from '../index';
 
 // REFERENCIAS HTML*************************************
+// *****************************************************
 const entradaTarea = document.querySelector('.new-todo');
 const list = document.querySelector('.todo-list');
 const btnBorrarCompletados = document.querySelector('.clear-completed');
 const ulfiltros = document.querySelector('.filters');
 const filtro = document.querySelectorAll('.filtro');
 // FUNCION CONSTRUIR LISTA TAREAS HTML******************
+// *****************************************************
 export const crearTodoHtml = (todo) => {
   const fragment = document.createDocumentFragment();
   // LI-------
@@ -42,6 +44,8 @@ export const crearTodoHtml = (todo) => {
   list.append(fragment);
 };
 // EVENTOS***********************************************
+// ******************************************************
+// ENTRADA DE TAREA
 entradaTarea.addEventListener('keyup', (e) => {
   let texto = e.target.value;
   if (e.keyCode === 13 && texto.length > 0) {
@@ -51,6 +55,7 @@ entradaTarea.addEventListener('keyup', (e) => {
     entradaTarea.value = '';
   }
 });
+// COMPLETADO O ELIMINAR
 list.addEventListener('click', (e) => {
   const nombreElemento = e.target.localName;
   const elementoPadre = e.target.parentElement.parentElement;
@@ -63,6 +68,7 @@ list.addEventListener('click', (e) => {
     list.removeChild(elementoPadre);
   }
 });
+// BORRAR TODOS LOS COMPLETADOS
 btnBorrarCompletados.addEventListener('click', () => {
   todolist.eliminarCompletadosTodo();
   for (let i = list.children.length - 1; i >= 0; i--) {
@@ -72,6 +78,7 @@ btnBorrarCompletados.addEventListener('click', () => {
     }
   }
 });
+// MOSTRAR TAREAS POR FILTROS: TODOS,PENDIENTES Y COMPLETADOS
 ulfiltros.addEventListener('click', (e) => {
   const textElement = e.target.text;
   if (!textElement) {
