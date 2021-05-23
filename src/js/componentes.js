@@ -1,16 +1,18 @@
 import { Todo } from '../classes/index-classes';
 import { todolist } from '../index';
 
-// REFERENCIAS HTML
+// REFERENCIAS HTML*************************************
 const entradaTarea = document.querySelector('.new-todo');
 const list = document.querySelector('.todo-list');
 const btnBorrarCompletados = document.querySelector('.clear-completed');
-// FUNCION CONSTRUIR LISTA TAREAS HTML
+const ulfiltros = document.querySelector('.filters');
+const filtro = document.querySelectorAll('.filtro');
+// FUNCION CONSTRUIR LISTA TAREAS HTML******************
 export const crearTodoHtml = (todo) => {
   const fragment = document.createDocumentFragment();
   // LI-------
   const listItem = document.createElement('LI');
-  // listItem.classList.toggle('completed', todo.completado);
+  listItem.classList.toggle('completed', todo.completado);
   listItem.setAttribute('data-id', todo.id);
   // **DIV------
   const listDiv = document.createElement('DIV');
@@ -39,7 +41,7 @@ export const crearTodoHtml = (todo) => {
   fragment.append(listItem);
   list.append(fragment);
 };
-// EVENTOS
+// EVENTOS***********************************************
 entradaTarea.addEventListener('keyup', (e) => {
   let texto = e.target.value;
   if (e.keyCode === 13 && texto.length > 0) {
@@ -67,6 +69,31 @@ btnBorrarCompletados.addEventListener('click', () => {
     const elemento = list.children[i];
     if (elemento.classList.contains('completed')) {
       list.removeChild(elemento);
+    }
+  }
+});
+ulfiltros.addEventListener('click', (e) => {
+  const textElement = e.target.text;
+  if (!textElement) {
+    return;
+  }
+  filtro.forEach((elem) => elem.classList.remove('selected'));
+  e.target.classList.add('selected');
+  for (let elem of list.children) {
+    elem.classList.remove('hidden');
+    const completado = elem.classList.contains('completed');
+    switch (textElement) {
+      case 'Pendientes':
+        if (completado) {
+          elem.classList.add('hidden');
+        }
+        break;
+      case 'Completados':
+        if (!completado) {
+          elem.classList.add('hidden');
+        }
+      default:
+        break;
     }
   }
 });
